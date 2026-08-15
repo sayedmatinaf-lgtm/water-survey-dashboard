@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <!-- گرادینت قطره آب -->
+    <linearGradient id="waterGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38ef7d" stop-opacity="0" />
+      <stop offset="0%" stop-color="#4facfe" />
+      <stop offset="100%" stop-color="#00f2fe" />
+    </linearGradient>
+
+    <!-- گرادینت قطره آب اصلی -->
+    <linearGradient id="dropGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#60a5fa" />
+      <stop offset="50%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+
+    <!-- گرادینت برگ اصلی -->
+    <linearGradient id="leafMainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4ade80" />
+      <stop offset="100%" stop-color="#16a34a" />
+    </linearGradient>
+
+    <!-- گرادینت برگ کوچک -->
+    <linearGradient id="leafSmallGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#86efac" />
+      <stop offset="100%" stop-color="#22c55e" />
+    </linearGradient>
+  </defs>
+
+  <!-- پس‌زمینه تیره و گرد برای خوانایی در مرورگر -->
+  <rect width="64" height="64" rx="16" fill="#0f172a"/>
+
+  <g transform="translate(4, 2)">
+    <!-- قطره آب آبی (سمت راست و بالا) -->
+    <path 
+      d="M32 6C32 6 48 24 48 38C48 48 40 54 32 54C28 54 24 52.5 21 50C28 48 34 42 34 32C34 23 28 14 32 6Z" 
+      fill="url(#dropGrad)" 
+    />
+
+    <!-- برگ سبز بزرگ (مرکز) -->
+    <path 
+      d="M30 20C30 20 18 30 20 44C22 51 29 55 35 53C33 45 35 33 41 26C38 21 34 20 30 20Z" 
+      fill="url(#leafMainGrad)" 
+    />
+
+    <!-- برگ سبز کوچک (سمت چپ) -->
+    <path 
+      d="M20 34C20 34 10 40 12 50C14 54 19 56 24 54C22 48 24 40 28 35C25 33 22 33 20 34Z" 
+      fill="url(#leafSmallGrad)" 
+    />
+  </g>
+</svg>
