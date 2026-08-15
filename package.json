@@ -1,5 +1,5 @@
 {
-  "name": "app",
+  "name": "water-survey-dashboard",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -19,12 +19,10 @@
     "recharts": "^2.15.0"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^4.3.4",
     "eslint": "^10.3.0",
-    "tailwindcss": "^4.3.3",
     "vite": "^8.0.12"
   }
 }
