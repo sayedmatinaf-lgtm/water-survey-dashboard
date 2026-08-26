@@ -1,19 +1,51 @@
 import React from 'react';
 import { LayoutDashboard, Database, BarChart3 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export default function Sidebar({ activeTab, setActiveTab, isConnected }) {
+  const { t, i18n } = useTranslation();
+  const currentLang = i18n.language || 'en';
+  const isFa = currentLang.startsWith('fa');
+
   const navItems = [
-    { section: 'OVERVIEW', items: [{ id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard }] },
-    { section: 'DATA', items: [{ id: 'survey-data', label: 'Survey Data', icon: Database }] },
-    { section: 'ANALYSIS', items: [{ id: 'analytics', label: 'Analytics', icon: BarChart3 }] }
+    {
+      section: isFa ? 'نمای کلی' : 'OVERVIEW',
+      items: [
+        {
+          id: 'dashboard',
+          label: isFa ? 'داشبورد' : 'Dashboard',
+          icon: LayoutDashboard
+        }
+      ]
+    },
+    {
+      section: isFa ? 'داده‌ها' : 'DATA',
+      items: [
+        {
+          id: 'survey-data',
+          label: isFa ? 'داده‌های سروی' : 'Survey Data',
+          icon: Database
+        }
+      ]
+    },
+    {
+      section: isFa ? 'تحلیل و آمار' : 'ANALYSIS',
+      items: [
+        {
+          id: 'analytics',
+          label: isFa ? 'تحلیل‌ها' : 'Analytics',
+          icon: BarChart3
+        }
+      ]
+    }
   ];
 
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar ${isFa ? 'rtl' : ''}`}>
       <div>
         <div className="sidebar-header" style={{ padding: '20px 16px' }}>
           <div className="brand-title" style={{ fontSize: '1.1rem', fontWeight: '700', color: '#070707' }}>
-            GW Survey System
+            {isFa ? 'سیستم سروی آب‌های زیرزمینی' : 'GW Survey System'}
           </div>
         </div>
 
@@ -42,15 +74,17 @@ export default function Sidebar({ activeTab, setActiveTab, isConnected }) {
 
       <div className="sidebar-footer">
         <div className="status-row">
-          <span>Data Status</span>
+          <span>{isFa ? 'وضعیت داده‌ها' : 'Data Status'}</span>
           <span className="status-indicator">
             <span className="status-dot"></span>
-            {isConnected ? 'Connected' : 'Demo Mode'}
+            {isConnected
+              ? (isFa ? 'متصل' : 'Connected')
+              : (isFa ? 'حالت آزمایشی' : 'Demo Mode')}
           </span>
         </div>
         <div className="status-row" style={{ color: 'var(--text-muted)' }}>
-          <span>Last updated</span>
-          <span>10:42 AM</span>
+          <span>{isFa ? 'آخرین به‌روزرسانی' : 'Last updated'}</span>
+          <span>{isFa ? '۱۰:۴۲ صبح' : '10:42 AM'}</span>
         </div>
       </div>
     </aside>

@@ -1478,3 +1478,64 @@ body {
   line-height: 1.35;
   margin: 0;
 }
+/* تنظیم چیدمان اصلی برای RTL */
+.app-container.rtl {
+  flex-direction: row-reverse !important;
+}
+
+/* جابه‌جایی بوردر سایدبار از راست به چپ در حالت فارسی */
+.sidebar.rtl {
+  border-right: none !important;
+  border-left: 1px solid var(--border, #e2e8f0) !important;
+}
+
+/* تنظیم جهت آیکون و متن دکمه‌ها در حالت RTL */
+.sidebar.rtl .nav-button {
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 10px;
+}
+/* اجبار انتقال سایدبار به سمت راست در حالت فارسی */
+.app-container.rtl {
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+/* اگر سایدبار دارای پوزیشن ثابت (fixed/absolute) باشد */
+.app-container.rtl .sidebar,
+.sidebar.rtl {
+  right: 0 !important;
+  left: auto !important;
+  border-right: none !important;
+  border-left: 1px solid var(--border, #e2e8f0) !important;
+}
+
+/* جابه‌جا کردن بدنه اصلی برنامه به سمت چپ سایدبار */
+.app-container.rtl .main-wrapper {
+  margin-right: 260px !important; /* طول سایدبار خود را در صورت نیاز تنظیم کنید */
+  margin-left: 0 !important;
+}
+
+/* اگر از Flexbox استفاده شده باشد */
+.app-container.rtl {
+  display: flex !important;
+  flex-direction: row !important; /* در حالت RTL خود مرورگر سایدبار را سمت راست می‌برد */
+}
+/* تعریف فونت ایران سنس */
+@font-face {
+  font-family: 'IRANSans';
+  src: url('./assets/fonts/IRANSansWeb.woff2') format('woff2'),
+       url('./assets/fonts/IRANSansWeb.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IRANSans';
+  src: url('./assets/fonts/IRANSansWeb_Bold.woff2') format('woff2'),
+       url('./assets/fonts/IRANSansWeb_Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}

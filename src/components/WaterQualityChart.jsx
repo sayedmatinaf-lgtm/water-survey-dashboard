@@ -8,51 +8,72 @@ import {
   ResponsiveContainer,
   Cell
 } from 'recharts';
+import { useTranslation } from 'react-i18next';
+import { formatNumber } from '../utils/numberFormatter';
 
 const QUALITY_COLORS = {
-  'سالم': '#16a34a',
-  'تا حدی': '#d97706',
-  'سالم نیست': '#dc2626',
-  'نامشخص': '#64748b'
+  Safe: '#16a34a',
+  Moderate: '#d97706',
+  Unsafe: '#dc2626',
+  Unknown: '#64748b'
+};
+
+const STATUS_KEYS = {
+  'سالم': 'Safe',
+  'تا حدی': 'Moderate',
+  'سالم نیست': 'Unsafe',
+  'نامشخص': 'Unknown',
+  'Safe': 'Safe',
+  'Moderate': 'Moderate',
+  'Unsafe': 'Unsafe',
+  'Unknown': 'Unknown'
 };
 
 export default function WaterQualityChart({ data = [] }) {
+  const { i18n } = useTranslation();
+  const currentLang = i18n.language;
+  const isFa = currentLang === 'fa';
+
+  const statusLabels = {
+    Safe: isFa ? 'سالم' : 'Safe',
+    Moderate: isFa ? 'تا حدی' : 'Moderate',
+    Unsafe: isFa ? 'سالم نیست' : 'Unsafe',
+    Unknown: isFa ? 'نامشخص' : 'Unknown'
+  };
+
   const chartData = useMemo(() => {
     const counts = {
-      'سالم': 0,
-      'تا حدی': 0,
-      'سالم نیست': 0,
-      'نامشخص': 0
+      Safe: 0,
+      Moderate: 0,
+      Unsafe: 0,
+      Unknown: 0
     };
 
     data.forEach((item) => {
-      const status = item.perceived_safety;
-
-      if (status === 'سالم') {
-        counts['سالم'] += 1;
-      } else if (status === 'تا حدی') {
-        counts['تا حدی'] += 1;
-      } else if (status === 'سالم نیست') {
-        counts['سالم نیست'] += 1;
-      } else {
-        counts['نامشخص'] += 1;
-      }
+      const rawStatus = item.perceived_safety;
+      const key = STATUS_KEYS[rawStatus] || 'Unknown';
+      counts[key] += 1;
     });
 
     const total = data.length;
 
-    return Object.entries(counts).map(([status, count]) => ({
-      status,
+    return Object.entries(counts).map(([key, count]) => ({
+      key,
+      label: statusLabels[key],
       count,
       percentage: total ? Math.round((count / total) * 100) : 0
     }));
-  }, [data]);
+  }, [data, isFa, statusLabels]);
 
   return (
     <div className="card">
       <div style={{ marginBottom: '16px' }}>
-        <h3 className="card-title">Water Safety Assessment</h3>
-        <p className="card-subtitle">Perceived water safety based on survey responses</p>
+        <h3 className="card-title">
+          {isFa ? 'ارزیابی مصئونیت آب' : 'Water Safety Assessment'}
+        </h3>
+        <p className="card-subtitle">
+          {isFa ? 'ارزیابی کیفیت آب بر اساس پاسخ‌های سروی' : 'Perceived water safety based on survey responses'}
+        </p>
       </div>
 
       <div style={{ height: '192px', width: '100%' }}>
@@ -62,7 +83,7 @@ export default function WaterQualityChart({ data = [] }) {
             margin={{ top: 10, right: 10, left: -25, bottom: 0 }}
           >
             <XAxis
-              dataKey="status"
+              dataKey="label"
               tick={{ fontSize: 11, fill: '#64748b' }}
               axisLine={false}
               tickLine={false}
@@ -72,11 +93,14 @@ export default function WaterQualityChart({ data = [] }) {
               tick={{ fontSize: 11, fill: '#64748b' }}
               axisLine={false}
               tickLine={false}
+              tickFormatter={(val) => formatNumber(val, currentLang)}
             />
             <Tooltip
               formatter={(value, name, props) => [
-                `${value} responses (${props.payload.percentage}%)`,
-                'Responses'
+                isFa
+                  ? `${formatNumber(value, currentLang)} پاسخ (${formatNumber(props.payload.percentage, currentLang)}٪)`
+                  : `${value} responses (${props.payload.percentage}%)`,
+                isFa ? 'پاسخ‌ها' : 'Responses'
               ]}
               contentStyle={{
                 backgroundColor: '#0f172a',
@@ -89,8 +113,8 @@ export default function WaterQualityChart({ data = [] }) {
             <Bar dataKey="count" radius={[4, 4, 0, 0]}>
               {chartData.map((entry) => (
                 <Cell
-                  key={entry.status}
-                  fill={QUALITY_COLORS[entry.status]}
+                  key={entry.key}
+                  fill={QUALITY_COLORS[entry.key]}
                 />
               ))}
             </Bar>
@@ -100,16 +124,18 @@ export default function WaterQualityChart({ data = [] }) {
 
       <div className="chart-legend-grid">
         {chartData.map((item) => (
-          <div key={item.status} className="legend-item">
+          <div key={item.key} className="legend-item">
             <div className="legend-label">
               <span
                 className="status-dot"
-                style={{ backgroundColor: QUALITY_COLORS[item.status] }}
+                style={{ backgroundColor: QUALITY_COLORS[item.key] }}
               />
-              <span className="legend-text">{item.status}</span>
+              <span className="legend-text">{item.label}</span>
             </div>
             <span className="legend-value">
-              {item.count} ({item.percentage}%)
+              {isFa
+                ? `${formatNumber(item.count, currentLang)} (${formatNumber(item.percentage, currentLang)}٪)`
+                : `${item.count} (${item.percentage}%)`}
             </span>
           </div>
         ))}

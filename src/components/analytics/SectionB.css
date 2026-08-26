@@ -1,0 +1,221 @@
+/* Layout & Grid Setup */
+.section-b-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.section-b-header {
+  margin-bottom: 8px;
+}
+
+.section-b-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text-primary, #111827);
+  margin: 0 0 6px 0;
+}
+
+.section-b-subtitle {
+  font-size: 13px;
+  color: var(--color-text-secondary, #6b7280);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.section-b-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .section-b-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Card Visual Design */
+.section-b-card {
+  background-color: var(--color-bg-card, #ffffff);
+  border: 1px solid var(--color-border, #e5e7eb);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.section-b-card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-primary, #1f2937);
+  margin: 0 0 16px 0;
+}
+
+.section-b-chart-box {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* Bar Chart Components */
+.b-bar-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.b-bar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--color-text-secondary, #374151);
+}
+
+.b-bar-label {
+  font-weight: 500;
+}
+
+.b-bar-metrics {
+  font-weight: 600;
+  color: var(--color-text-primary, #111827);
+}
+
+.b-bar-track {
+  width: 100%;
+  height: 10px;
+  background-color: #f3f4f6;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.b-bar-fill {
+  height: 100%;
+  background-color: #2563eb;
+  border-radius: 5px;
+  transition: width 0.4s ease;
+}
+
+/* Stacked Bar Styling */
+.b-stacked-track {
+  display: flex;
+  width: 100%;
+  height: 24px;
+  background-color: #f3f4f6;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.b-stacked-segment {
+  height: 100%;
+  transition: width 0.4s ease;
+}
+
+.bg-active { background-color: #059669; }
+.bg-warning { background-color: #d97706; }
+.bg-danger { background-color: #dc2626; }
+
+.b-stacked-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.b-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.b-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Indicators & Key Insights Footer */
+.section-b-card-footer {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border-subtle, #f3f4f6);
+}
+
+.b-key-finding {
+  background-color: #eff6ff;
+  border-inline-start: 4px solid #2563eb;
+  padding: 10px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #1e40af;
+}
+
+.b-indicator-grid {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.b-indicator-box {
+  flex: 1;
+  min-width: 120px;
+  background-color: #f9fafb;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.b-indicator-val {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.b-indicator-lbl {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+/* State Handlers */
+.b-state-card {
+  padding: 48px;
+  text-align: center;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+.b-btn-retry {
+  margin-top: 12px;
+  padding: 6px 16px;
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+}
+/* تعریف فونت ایران سنس */
+@font-face {
+  font-family: 'IRANSans';
+  src: url('./assets/fonts/IRANSansWeb.woff2') format('woff2'),
+       url('./assets/fonts/IRANSansWeb.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IRANSans';
+  src: url('./assets/fonts/IRANSansWeb_Bold.woff2') format('woff2'),
+       url('./assets/fonts/IRANSansWeb_Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}

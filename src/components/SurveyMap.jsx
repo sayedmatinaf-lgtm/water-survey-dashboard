@@ -6,9 +6,10 @@ import {
   Popup,
   useMap
 } from 'react-leaflet';
-
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import { useTranslation } from 'react-i18next';
+import { formatNumber } from '../utils/numberFormatter';
 
 // Fix Leaflet marker icon issues
 delete L.Icon.Default.prototype._getIconUrl;
@@ -16,10 +17,8 @@ delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl:
     'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
-
   iconUrl:
     'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
-
   shadowUrl:
     'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
@@ -67,6 +66,9 @@ export default function SurveyMap({
   data = [],
   onSelectRecord
 }) {
+  const { i18n } = useTranslation();
+  const currentLang = i18n.language;
+  const isFa = currentLang === 'fa';
 
   // Herat
   const defaultCenter = [34.345, 62.205];
@@ -83,25 +85,18 @@ export default function SurveyMap({
 
       {/* Header */}
       <div className="card-header">
-
         <div>
-
           <h3 className="card-title">
-            Geographic Survey Distribution
+            {isFa ? 'توزیع جغرافیایی سروی' : 'Geographic Survey Distribution'}
           </h3>
-
           <p className="card-subtitle">
-            Spatial mapping of assessed water points
+            {isFa ? 'نقشه‌برداری فضایی نقاط آب ارزیابی‌شده' : 'Spatial mapping of assessed water points'}
           </p>
-
         </div>
-
       </div>
-
 
       {/* Map */}
       <div className="map-container">
-
         <MapContainer
           center={defaultCenter}
           zoom={11}
@@ -119,14 +114,11 @@ export default function SurveyMap({
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
 
-
           {/* Automatically move to survey points */}
           <MapUpdater data={validData} />
 
-
           {/* Survey Points */}
           {validData.map((point) => (
-
             <Marker
               key={point.id || point.point_id}
               position={[
@@ -134,33 +126,30 @@ export default function SurveyMap({
                 Number(point.longitude)
               ]}
             >
-
               <Popup>
-
-                <div className="map-popup-content">
-
+                <div className="map-popup-content" dir={isFa ? 'rtl' : 'ltr'}>
                   <p className="map-popup-id">
-                    {point.point_id}
+                    {formatNumber(point.point_id, currentLang)}
                   </p>
 
                   <p className="map-popup-text">
-                    <strong>District:</strong>{' '}
-                    {point.district}
+                    <strong>{isFa ? 'ولسوالی / ناحیه:' : 'District:'}</strong>{' '}
+                    {point.district || '-'}
                   </p>
 
                   <p className="map-popup-text">
-                    <strong>Locality:</strong>{' '}
-                    {point.locality}
+                    <strong>{isFa ? 'محل / قریه:' : 'Locality:'}</strong>{' '}
+                    {point.locality || '-'}
                   </p>
 
                   <p className="map-popup-text">
-                    <strong>Water Source:</strong>{' '}
-                    {point.water_source}
+                    <strong>{isFa ? 'منبع آب:' : 'Water Source:'}</strong>{' '}
+                    {point.water_source || '-'}
                   </p>
 
                   <p className="map-popup-text">
-                    <strong>Safety:</strong>{' '}
-                    {point.perceived_safety || 'N/A'}
+                    <strong>{isFa ? 'امنیت بهداشتی:' : 'Safety:'}</strong>{' '}
+                    {point.perceived_safety || (isFa ? 'نامشخص' : 'N/A')}
                   </p>
 
                   <button
@@ -170,19 +159,14 @@ export default function SurveyMap({
                     }
                     className="btn btn-primary map-popup-btn"
                   >
-                    View Details
+                    {isFa ? 'مشاهده جزئیات' : 'View Details'}
                   </button>
-
                 </div>
-
               </Popup>
-
             </Marker>
-
           ))}
 
         </MapContainer>
-
       </div>
 
     </div>

@@ -7,19 +7,23 @@ import {
   Network,
   Droplet
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { formatNumber, formatPercent } from '../utils/numberFormatter';
 
 export default function KPICards({ data = [] }) {
+  const { t, i18n } = useTranslation();
+  const currentLang = i18n.language;
+
   // ============================================
   // BASIC TOTALS
   // ============================================
   const totalPoints = data.length;
-  const totalHouseholds = data.length;
 
   // ============================================
   // SAFE WATER ACCESS
   // ============================================
   const safeCount = data.filter(
-    (item) => item.perceived_safety === 'سالم'
+    (item) => item.perceived_safety === 'سالم' || item.perceived_safety === 'Safe'
   ).length;
 
   const safePercentage = totalPoints
@@ -32,7 +36,9 @@ export default function KPICards({ data = [] }) {
   const atRiskCount = data.filter(
     (item) =>
       item.perceived_safety === 'تا حدی' ||
-      item.perceived_safety === 'سالم نیست'
+      item.perceived_safety === 'سالم نیست' ||
+      item.perceived_safety === 'Moderate' ||
+      item.perceived_safety === 'Unsafe'
   ).length;
 
   const atRiskPercentage = totalPoints
@@ -43,7 +49,7 @@ export default function KPICards({ data = [] }) {
   // ACTIVE NETWORK CONNECTION
   // ============================================
   const networkActiveCount = data.filter(
-    (item) => item.network_connection === 'وصل و فعال'
+    (item) => item.network_connection === 'وصل و فعال' || item.network_connection === 'Active'
   ).length;
 
   const networkPercentage = totalPoints
@@ -56,7 +62,8 @@ export default function KPICards({ data = [] }) {
   const availableCount = data.filter(
     (item) =>
       item.water_sufficiency === 'همیشه کافی' ||
-      item.water_sufficiency === 'اکثرا کافی'
+      item.water_sufficiency === 'اکثرا کافی' ||
+      item.water_sufficiency === 'Sufficient'
   ).length;
 
   const availablePercentage = totalPoints
@@ -68,37 +75,45 @@ export default function KPICards({ data = [] }) {
   // ============================================
   const cards = [
     {
-      title: 'Total Survey Points',
-      value: totalPoints.toLocaleString(),
-      subtext: 'Survey locations',
+      title: t('kpi.totalPoints', 'Total Survey Points'),
+      value: formatNumber(totalPoints, currentLang),
+      subtext: currentLang === 'fa' ? 'موقعیت‌های سروی' : 'Survey locations',
       icon: MapPin,
       themeClass: 'kpi-blue'
     },
     {
-      title: 'Safe Water Access',
-      value: `${safePercentage}%`,
-      subtext: `${safeCount} points rated safe`,
+      title: t('kpi.safeWater', 'Safe Water Access'),
+      value: formatPercent(safePercentage, currentLang),
+      subtext: currentLang === 'fa' 
+        ? `${formatNumber(safeCount, currentLang)} نقطه مصئون ارزیابی شد`
+        : `${formatNumber(safeCount, currentLang)} points rated safe`,
       icon: ShieldCheck,
       themeClass: 'kpi-emerald'
     },
     {
-      title: 'Unsafe / At Risk',
-      value: `${atRiskPercentage}%`,
-      subtext: `${atRiskCount} points requiring action`,
+      title: t('kpi.unsafeWater', 'Unsafe / At Risk'),
+      value: formatPercent(atRiskPercentage, currentLang),
+      subtext: currentLang === 'fa' 
+        ? `${formatNumber(atRiskCount, currentLang)} نقطه نیازمند رسیدگی`
+        : `${formatNumber(atRiskCount, currentLang)} points requiring action`,
       icon: AlertTriangle,
       themeClass: 'kpi-amber'
     },
     {
-      title: 'Network Connection',
-      value: `${networkPercentage}%`,
-      subtext: `${networkActiveCount} active connections`,
+      title: currentLang === 'fa' ? 'اتصال شبکه' : 'Network Connection',
+      value: formatPercent(networkPercentage, currentLang),
+      subtext: currentLang === 'fa' 
+        ? `${formatNumber(networkActiveCount, currentLang)} اتصال فعال`
+        : `${formatNumber(networkActiveCount, currentLang)} active connections`,
       icon: Network,
       themeClass: 'kpi-indigo'
     },
     {
-      title: 'Water Available',
-      value: `${availablePercentage}%`,
-      subtext: `${availableCount} with adequate availability`,
+      title: t('kpi.waterAvail', 'Water Available'),
+      value: formatPercent(availablePercentage, currentLang),
+      subtext: currentLang === 'fa' 
+        ? `${formatNumber(availableCount, currentLang)} با موجودیت کافی`
+        : `${formatNumber(availableCount, currentLang)} with adequate availability`,
       icon: Droplet,
       themeClass: 'kpi-cyan'
     }

@@ -1,0 +1,178 @@
+{
+  "appTitle": "Water Survey Dashboard",
+  "appSubtitle": "Water access and household survey monitoring",
+  "refresh": "Refresh",
+  "refreshing": "Refreshing...",
+  "nav": {
+    "waterSurvey": "WATER SURVEY",
+    "overview": "Overview",
+    "dashboard": "Dashboard",
+    "data": "DATA",
+    "surveyData": "Survey Data",
+    "gisMap": "GIS Map",
+    "analysis": "ANALYSIS",
+    "analytics": "Analytics"
+  },
+  "kpi": {
+    "totalPoints": "Total Survey Points",
+    "households": "Households Surveyed",
+    "safeWater": "Safe Water Access",
+    "unsafeWater": "Unsafe / At Risk",
+    "avgDistance": "Average Distance",
+    "waterAvail": "Water Availability"
+  },
+  "filters": {
+    "province": "Province",
+    "district": "District",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "waterSource": "Water Source",
+    "perceivedSafety": "Perceived Safety",
+    "allProvinces": "All Provinces",
+    "allDistricts": "All Districts",
+    "allSources": "All Sources",
+    "allStatuses": "All Statuses",
+    "reset": "Reset Filters"
+  },
+  "charts": {
+    "trendTitle": "Survey Collection Trend",
+    "trendSub": "Number of survey points collected over time",
+    "sourceTitle": "Primary Water Sources",
+    "qualityTitle": "Water Quality Status",
+    "availTitle": "Water Availability",
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "monthly": "Monthly",
+    "surveys": "Surveys"
+  },
+  "map": {
+    "title": "Survey Locations Map",
+    "pointId": "Point ID",
+    "district": "District",
+    "waterSource": "Water Source",
+    "safety": "Water Safety"
+  },
+  "table": {
+    "title": "Recent Survey Records",
+    "searchPlaceholder": "Search survey records...",
+    "pointId": "Point ID",
+    "surveyDate": "Survey Date",
+    "district": "District",
+    "locality": "Locality",
+    "waterSource": "Water Source",
+    "quality": "Quality / Taste",
+    "safety": "Safety",
+    "actions": "Actions",
+    "view": "View"
+  },
+  "details": {
+    "title": "Survey Details",
+    "surveyInfo": "Survey Information",
+    "location": "Location",
+    "household": "Household Information",
+    "water": "Water Information",
+    "additional": "Additional Information",
+    "interviewer": "Interviewer",
+    "age": "Age",
+    "householdSize": "Household Size",
+    "residenceDuration": "Residence Duration",
+    "tenure": "Tenure",
+    "wellDepth": "Well Depth",
+    "waterCost": "Monthly Water Cost",
+    "waterBurden": "Water Burden",
+    "close": "Close"
+  },
+  "states": {
+    "loading": "Loading survey data...",
+    "error": "Unable to load survey data.",
+    "tryAgain": "Try Again",
+    "noData": "No survey records found."
+  },
+  "analytics": {
+    "title": "Water Survey Analytics",
+    "subtitle": "Comprehensive analytical breakdown of water accessibility, quality perception, economic burden, and health impacts.",
+    "resetFilters": "Reset Filters",
+    "allProvinces": "All Provinces",
+    "allDistricts": "All Districts",
+    "allNeighborhoods": "All Neighborhoods",
+    "multipleAllowed": "Multiple answers allowed",
+    "selfReported": "Self-reported data",
+    "keyFindings": "Key Findings",
+    "households": "Households",
+    "noData": "No survey data is available for the selected filters.",
+    "error": "Unable to load analytics data. Please try again.",
+    "tryAgain": "Try Again",
+    "sections": {
+      "waterSourceAccess": "01 — Water Source and Access",
+      "quantityAccess": "02 — Quantity and Daily Access",
+      "waterQuality": "03 — Water Quality (Perceived)",
+      "economicBurden": "04 — Coping Strategies and Economic Burden",
+      "healthImpacts": "05 — Health Impacts",
+      "priorities": "06 — Priorities and Opinions",
+      "crossAnalysis": "07 — Cross Analysis"
+    },
+    "questions": {
+      "q05": "Main Source of Drinking Water",
+      "q06": "Urban Network Connection Status",
+      "q07": "Household Well Depth",
+      "q08": "Well Deepening History (Past 5 Years)",
+      "q09": "Daily Water Sufficiency",
+      "q10": "Daily Water Availability Hours",
+      "q11": "Weekly Water Interruption Frequency",
+      "q12": "Duration of Interruption",
+      "q13": "Perceived Water Taste",
+      "q14_app": "Perceived Water Appearance",
+      "q14_fetch": "Fetching Water Elsewhere",
+      "q15": "Perceived Water Odor",
+      "q16": "Water Quality Change (Past 5 Years)",
+      "q17": "Perceived Drinking Water Safety",
+      "q18": "Septic Tank Presence",
+      "q19": "Water Treatment Practices",
+      "q20": "Water Treatment Device Availability",
+      "q21": "Monthly Safe Water Cost",
+      "q22": "Economic Burden of Water Cost",
+      "q23": "Reported Water-Related Health Problems",
+      "q24": "Perceived Link Between Health and Water",
+      "q25": "Primary Water Problem",
+      "q26": "Community Suggestions and Solutions"
+    },
+    "cross": {
+      "q05_q09": "Water Source vs Daily Sufficiency",
+      "q06_q11": "Urban Network Status vs Interruption Frequency",
+      "q21_q22": "Monthly Water Cost vs Economic Pressure"
+    },
+    "sectionB": {
+      "title": "Water Source and Access",
+      "subtitle": "Analysis of household drinking-water sources, urban network connection, household well depth, and changes to wells.",
+      "keyFinding": "Key Finding",
+      "noValidData": "No valid data available.",
+      "basedOnReported": "Based on reported well-depth categories",
+      "loading": "Loading analytics...",
+      "noData": "No survey data available.",
+      "error": "Unable to load water source analytics.",
+      "tryAgain": "Try Again",
+      "deepWellShare": "Deep Wells Share",
+      "wellDeepenedShare": "Deepened Wells Share",
+      "inactiveNetwork": "Inactive/Broken Network",
+      "mainSource": "Main Water Source",
+      "q05": {
+        "title": "Main Drinking Water Sources",
+        "finding": "The most common drinking-water source is {{category}}, reported by {{percentage}}% of surveyed households."
+      },
+      "q06": {
+        "title": "Urban Water Network Connection",
+        "indicatorNotWorking": "Connected but Not Working",
+        "indicatorNotConnected": "Not Connected"
+      },
+      "q07": {
+        "title": "Household Well Depth",
+        "deepWellsTitle": "Households with Deep Wells"
+      },
+      "q08": {
+        "title": "Well Deepening or New Well Construction",
+        "indicatorTitle": "Households Reporting Well Changes",
+        "indicatorDesc": "of respondents reported deepening their well or digging a new well."
+      }
+    }
+  }
+}

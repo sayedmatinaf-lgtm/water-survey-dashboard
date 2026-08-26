@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import FilterBar from './components/FilterBar';
@@ -10,6 +11,7 @@ import GeographicSummary from './components/GeographicSummary';
 import SurveyMap from './components/SurveyMap';
 import SurveyTable from './components/SurveyTable';
 import SurveyDetailsModal from './components/SurveyDetailsModal';
+import AnalyticsView from './views/AnalyticsView'; // اضافه شدن صفحه آنالیز
 import { waterSurveyService } from './services/waterSurveyService';
 import './index.css';
 
@@ -20,6 +22,10 @@ export default function App() {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
   const [selectedRecord, setSelectedRecord] = useState(null);
+
+  const { i18n } = useTranslation();
+  const currentLang = i18n.language || 'en';
+  const isRtl = currentLang.startsWith('fa');
 
   const [filters, setFilters] = useState({
     province: '',
@@ -49,18 +55,21 @@ export default function App() {
   }, [surveys]);
 
   return (
-    <div className="app-container">
+    <div className={`app-container ${isRtl ? 'rtl' : 'ltr'}`} dir={isRtl ? 'rtl' : 'ltr'}>
       <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} isConnected={isConnected} />
       
       <div className="main-wrapper">
         <Header onRefresh={loadData} isRefreshing={isRefreshing} />
         
-        <FilterBar
-          filters={filters}
-          setFilters={setFilters}
-          availableOptions={availableOptions}
-          onReset={() => setFilters({ province: '', district: '', waterSource: '', status: '' })}
-        />
+        {/* فیلتربار عمومی فقط در تب‌های غیر از آنالیز نشان داده می‌شود زیرا آنالیز فیلتر اختصاصی خود را دارد */}
+        {activeTab !== 'analytics' && (
+          <FilterBar
+            filters={filters}
+            setFilters={setFilters}
+            availableOptions={availableOptions}
+            onReset={() => setFilters({ province: '', district: '', waterSource: '', status: '' })}
+          />
+        )}
 
         <main className="dashboard-content">
           {/* Dashboard Tab: Show full overview */}
@@ -92,17 +101,7 @@ export default function App() {
 
           {/* Analytics Tab */}
           {activeTab === 'analytics' && (
-            <>
-              <KPICards data={surveys} />
-              <div className="grid-two-col">
-                <SurveyTrend data={surveys} />
-                <WaterSourceChart data={surveys} />
-              </div>
-              <div className="grid-equal-col">
-                <WaterQualityChart data={surveys} />
-                <GeographicSummary data={surveys} />
-              </div>
-            </>
+            <AnalyticsView />
           )}
         </main>
       </div>
